@@ -1,28 +1,28 @@
-requests = require('requests');
-cjson = require('cjson');
-inspect = require('inspect');
+requests = require([[requests]]);
+cjson = require([[cjson]]);
+inspect = require([[inspect]]);
 
 Diana = { setKey = {}, setDefaultRegion = {}, championMastery = {}, champion = {}, league = {}, lolStatus = {}, match = {}, spectator = {}, summoner = {}, thirdPartyCode = {} };
 
-local summonerUrl = "https://%s.api.riotgames.com/lol/summoner/v3/summoners/%s";
-local summonerByName = "by-name/%s";
-local summonerByAccountId = "by-account/%d";
-local summonerBySummonerId = "%d";
+local summonerUrl = [[https://%s.api.riotgames.com/lol/summoner/v3/summoners/%s]];
+local summonerByName = [[by-name/%s]];
+local summonerByAccountId = [[by-account/%d]];
+local summonerBySummonerId = [[%d]];
 
-local championMasteryUrl = "https://%s.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/%d";
-local championMasteryScoresUrl = "https://%s.api.riotgames.com/lol/champion-mastery/v3/scores/by-summoner/%d";
+local championMasteryUrl = [[https://%s.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/%d]];
+local championMasteryScoresUrl = [[https://%s.api.riotgames.com/lol/champion-mastery/v3/scores/by-summoner/%d]];
 
-local championUrl = "https://%s.api.riotgames.com/lol/platform/v3/champions%s&freeToPlay=%t"
+local championUrl = [[https://%s.api.riotgames.com/lol/platform/v3/champions%s&freeToPlay=%t]];
 
-local apiKey = "";
-local defaultRegion = "na1";
+local apiKey = [[]];
+local defaultRegion = [[na1]];
 
 do
   local strformat = string.format
   function string.format(format, ...)
     local args = {...}
     local match_no = 1
-    for pos, type in string.gmatch(format, "()%%.-(%a)") do
+    for pos, type in string.gmatch(format, '()%%.-(%a)') do
       if type == 't' then
         args[match_no] = tostring(args[match_no])
       end
@@ -34,7 +34,7 @@ do
 end
 
 Diana.setKey = function(key)
-  apiKey = "?api_key=" .. key;
+  apiKey = '?api_key=' .. key;
 end
 
 Diana.setDefaultRegion = function(region)
@@ -42,15 +42,15 @@ Diana.setDefaultRegion = function(region)
 end
 
 Diana.summoner.getSummoner = function(args)
-  local methodType = "";
+  local methodType = '';
   local requestId = 0;
-  if type(args.name) == "string" then
+  if type(args.name) == 'string' then
     methodType = summonerByName;
     requestId = args.name;
-  elseif type(args.accountId) == "number" then
+  elseif type(args.accountId) == 'number' then
     methodType = summonerByAccountId;
     requestId = args.accountId;
-  elseif type(args.summonerId) == "number" then
+  elseif type(args.summonerId) == 'number' then
     methodType = summonerBySummonerId;
     requestId = args.summonerId;
   end
@@ -65,13 +65,13 @@ Diana.summoner.getSummoner = function(args)
 end
 
 Diana.championMastery.getMasteries = function(args)
-  local requestId = "";
-  if type(args.summonerId) ~= "number" then
-    print("Summoner ID nil or NaN.");
+  local requestId = '';
+  if type(args.summonerId) ~= 'number' then
+    print('Summoner ID nil or NaN.');
     return nil;
   end
-  if type(args.championId) == "number" then
-    requestId = "/by-champion/" .. args.championId;
+  if type(args.championId) == 'number' then
+    requestId = '/by-champion/' .. args.championId;
   end
   local platform = args.region or defaultRegion;
   local requestUrl = string.format(championMasteryUrl, platform, args.summonerId) .. requestId .. apiKey;
@@ -80,8 +80,8 @@ Diana.championMastery.getMasteries = function(args)
 end
 
 Diana.championMastery.getScore = function(args)
-  if type(args.summonerId) ~= "number" then
-    print("Summoner ID nil or NaN.");
+  if type(args.summonerId) ~= 'number' then
+    print('Summoner ID nil or NaN.');
     return nil;
   end
   local platform = args.region or defaultRegion;
@@ -98,7 +98,7 @@ Diana.champion.getChampions = function(args)
   return json;
 end
 
-Diana.setKey("");
+Diana.setKey('');
 summoner = Diana.summoner.getSummoner{summonerId = 51704649};
 mastery = Diana.championMastery.getMasteries{summonerId = 51704649};
 score = Diana.championMastery.getScore{summonerId = 51704649};
