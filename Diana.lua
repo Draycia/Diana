@@ -71,7 +71,7 @@ Diana.championMastery.getMasteries = function(args)
     return nil;
   end
   if type(args.championId) == 'number' then
-    requestId = 'my-champion/' .. args.championId;
+    requestId = 'by-champion/' .. args.championId;
   end
   local platform = args.region or defaultRegion;
   local requestUrl = string.format(championMasteryUrl, platform, args.summonerId) .. requestId .. apiKey;
