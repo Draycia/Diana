@@ -27,8 +27,7 @@ do
     local args = {...}
     local match_no = 1
     for pos, type in string.gmatch(format, '()%%.-(%a)') do
-      if type == 't' then
-        args[match_no] = tostring(args[match_no])
+      if type == 't' then        args[match_no] = tostring(args[match_no])
       end
       match_no = match_no + 1
     end
@@ -48,7 +47,7 @@ Diana.setDefaultRegion = function(region)
 end
 
 [[-- Get champion data.
-$optional: 'args' -> { $param: 'name' = null , $param: 'accountId' = null , $param: 'summonerId' = null }(maxCount: 2)
+$optional: 'args' -> { $param: 'name' = nil , $param: 'accountId' = nil , $param: 'summonerId' = nil }(maxCount: 2)
 $param: 'args' -> { 'name':string , 'accountId':number , 'summonerId':number }(maxCount: 1)   --]]
 Diana.summoner.getSummoner = function(args)
   local methodType = '';
@@ -74,8 +73,8 @@ Diana.summoner.getSummoner = function(args)
 end
 
 [[-- Get champion data.
-$optional: 'args' -> { $param: 'championId' = null }(maxCount: 1)
-$param: 'args' -> { 'summonerId':number , 'championId':number }(maxCount: 1)   --]]
+$optional: 'args' -> { $param: 'championId' = nil }(maxCount: 1)
+$param: 'args' -> { 'summonerId':number , 'championId':number }(maxCount: 2)   --]]
 Diana.championMastery.getMasteries = function(args)
   local requestId = '';
   if type(args.summonerId) ~= 'number' then
@@ -106,7 +105,7 @@ end
 
 [[-- Get champion data.
 $optional: 'args' -> { $param: 'region' = 'defaultRegion' , $param: 'freeToPlay' = false }(maxCount: 2)
-$param: 'args' -> { 'region':string , 'freeToPlay':boolean }(maxCount: 2)   --]]
+$param: 'args' -> { 'region':string , 'defaultRegion':string , 'freeToPlay':boolean }(maxCount: 3)   --]]
 Diana.champion.getChampions = function(args)
   local platform = args.region or defaultRegion;
   local freeToPlay = args.freeToPlay or false;
