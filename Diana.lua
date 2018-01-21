@@ -27,7 +27,8 @@ do
     local args = {...}
     local match_no = 1
     for pos, type in string.gmatch(format, '()%%.-(%a)') do
-      if type == 't' then        args[match_no] = tostring(args[match_no])
+      if type == 't' then
+        args[match_no] = tostring(args[match_no])
       end
       match_no = match_no + 1
     end
@@ -46,9 +47,9 @@ Diana.setDefaultRegion = function(region)
   defaultRegion = region;
 end
 
-[[-- Get champion data.
+--[[ Get champion data.
 $optional: 'args' -> { $param: 'name' = nil , $param: 'accountId' = nil , $param: 'summonerId' = nil }(maxCount: 2)
-$param: 'args' -> { 'name':string , 'accountId':number , 'summonerId':number }(maxCount: 1)   --]]
+$param: 'args' -> { 'name':string , 'accountId':number , 'summonerId':number }(maxCount: 1)   ]]--
 Diana.summoner.getSummoner = function(args)
   local methodType = '';
   local requestId = 0;
@@ -72,7 +73,7 @@ Diana.summoner.getSummoner = function(args)
   return json;
 end
 
-[[-- Get champion data.
+--[[ Get champion data.
 $optional: 'args' -> { $param: 'championId' = nil }(maxCount: 1)
 $param: 'args' -> { 'summonerId':number , 'championId':number }(maxCount: 2)   --]]
 Diana.championMastery.getMasteries = function(args)
@@ -90,8 +91,8 @@ Diana.championMastery.getMasteries = function(args)
   return json;
 end
 
-[[-- Get champion mastery score for summoner.
-$param: 'args' -> { 'summonerId' }(maxCount: 1)   --]]
+--[[ Get champion mastery score for summoner.
+$param: 'args' -> { 'summonerId' }(maxCount: 1)   ]]--
 Diana.championMastery.getScore = function(args)
   if type(args.summonerId) ~= 'number' then
     print('Summoner ID nil or NaN.');
@@ -103,9 +104,9 @@ Diana.championMastery.getScore = function(args)
   return tonumber(notJson);
 end
 
-[[-- Get champion data.
+--[[ Get champion data.
 $optional: 'args' -> { $param: 'region' = 'defaultRegion' , $param: 'freeToPlay' = false }(maxCount: 2)
-$param: 'args' -> { 'region':string , 'defaultRegion':string , 'freeToPlay':boolean }(maxCount: 3)   --]]
+$param: 'args' -> { 'region':string , 'defaultRegion':string , 'freeToPlay':boolean }(maxCount: 3)   ]]--
 Diana.champion.getChampions = function(args)
   local platform = args.region or defaultRegion;
   local freeToPlay = args.freeToPlay or false;
