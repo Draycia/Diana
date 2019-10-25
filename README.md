@@ -21,7 +21,7 @@ It will print all variables in whatever table to pass in.
 Example Usage:
 ```lua
 local input = "Vìcarious"
-local user = Summoner.by_name(input")
+local user = Summoner.by_name(input)
 
 print(user.name)
 ```
@@ -36,7 +36,9 @@ If you're running Arch Linux, here are working packages for the above dependenci
 [lua-socket](https://www.archlinux.org/packages/community/x86_64/lua-socket/)
 
 #### TODO
-- Attempt pure-lua http(s) connections and make this lib free of external dependencies
-- Attempt to make this lib easily usable on Windows
-- Store all endpoints in a table and export it out of the `Diana.lua` file
+- Attempt pure-lua http(s) connections and make this lib free of external dependencies.
+- Attempt to make this lib easily usable on Windows.
+- Store all endpoints in a table and export it out of the `Diana.lua` file.
 - Allow user to pass in table for query parameters and auto format them in `api-client.lua`
+- Add in the 200 OK status code to function responses when requests succeed. 
+- Endpoints that do not return traditional JSON (see: champion-mastery) should turn them into JSON with the status code.
