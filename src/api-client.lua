@@ -16,6 +16,7 @@
 -- Separated parameters out into their own argument
 -- Added alternate methods that don't turn the api response into a table
 -- Added semicolons
+-- Added response code to successful responses (albeit poorly)
 
 http = require("socket.http");
 https = require("ssl.https");
@@ -47,11 +48,7 @@ function api_client.api_call(...)
     local response = json:decode(common(...));
 	
     if (response.status == nil) then
-        response.status = {}
-    end
-    
-    if (response.status.status_code == nil) then
-        response.status.status_code = 200
+	    response.status = { status_code = 200 } };
     end
 	
     return json:decode(common(...));
