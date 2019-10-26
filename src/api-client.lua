@@ -47,7 +47,7 @@ function api_client.api_call(...)
     return json:decode(common(...));
 end
 
-function api_client_api_call_raw(...)
+function api_client.api_call_raw(...)
     return common(...);
 end
 
