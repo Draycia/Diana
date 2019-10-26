@@ -40,5 +40,4 @@ If you're running Arch Linux, here are working packages for the above dependenci
 - Attempt to make this lib easily usable on Windows.
 - Store all endpoints in a table and export it out of the `Diana.lua` file.
 - Allow user to pass in table for query parameters and auto format them in `api-client.lua`
-- Add in the 200 OK status code to function responses when requests succeed. 
 - Endpoints that do not return traditional JSON (see: champion-mastery) should turn them into JSON with the status code.

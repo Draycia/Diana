@@ -44,6 +44,16 @@ local function common(...)
 end
 
 function api_client.api_call(...)
+    local response = json:decode(common(...));
+	
+    if (response.status == nil) then
+        response.status = {}
+    end
+    
+    if (response.status.status_code == nil) then
+        response.status.status_code = 200
+    end
+	
     return json:decode(common(...));
 end
 
