@@ -14,20 +14,20 @@
 -- Removed the content length header and calculation
 -- Added header X-Riot-Token used for specific REST service
 -- Separated parameters out into their own argument
+-- Added alternate methods that don't turn the api response into a table
+-- Added semicolons
 
-http = require("socket.http")
-https = require("ssl.https")
-json = (loadfile "./libs/JSON.lua")()
-loadfile ("./libs/Utils.lua")()
+http = require("socket.http");
+https = require("ssl.https");
+json = (loadfile "./libs/JSON.lua")();
+loadfile ("./libs/Utils.lua")();
 
-local api_client = {}
+local api_client = {};
 
-function api_client.api_call(...)
-    local args = {...}
-
-    local params = args[3] or ""
-
-    local respbody = {}
+local function common(...)
+    local args = {...};
+    local params = args[3] or "";
+    local respbody = {};
 
     https.request {
         method = args[1],
@@ -40,7 +40,15 @@ function api_client.api_call(...)
         sink = ltn12.sink.table(respbody)
     }
 
-    return json:decode(table.concat(respbody))
+    return table.contat(respbody);
+end
+
+function api_client.api_call(...)
+    return json:decode(common(...));
+end
+
+function api_client_api_call_raw(...)
+    return common(...);
 end
 
 return api_client
