@@ -7,9 +7,9 @@
 api_client = require("api-client");
 api_key = arg[1];
 
-local Summoner = require("v4.Summoner");
-local ThirdPartyCode = require("v4.ThirdPartyCode");
+local API = {};
 
--- Tests:
-local summonerId = Summoner.by_name("Vìcarious").id;
-print(ThirdPartyCode.by_summoner(summonerId));
+API.Summoner = require("v4.Summoner");
+API.ThirdPartyCode = require("v4.ThirdPartyCode");
+
+return API;
